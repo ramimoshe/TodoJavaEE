@@ -13,5 +13,7 @@
 </head>
 <body>
 <h1>ERROR PAGE</h1>
+Error details:
+<%=(String) request.getAttribute("content")%>
 </body>
 </html>

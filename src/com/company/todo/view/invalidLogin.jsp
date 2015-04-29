@@ -12,7 +12,8 @@
 </head>
 
 <body>
-    Sorry, you are not a registered user! Please sign up first
+    Sorry, you are not a registered user! Please sign up first </br>
+    Click <a href="/home/registerPage">here</a> to register, or click <a href="/home">here</a> to go to home page
 </body>
 
 </html>
