@@ -13,15 +13,31 @@ import java.io.IOException;
 /**
  * Created by rami.moshe on 4/29/2015.
  */
-@WebServlet(name = "HomeController", urlPatterns = { "/" })
+@WebServlet(name = "HomeController", urlPatterns = { "/home/*" })
 public class HomeController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String homeView = JspUrlResolver.getJspUrl("index.jsp");
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(homeView);
-        dispatcher.forward(request, response);
+
+        RequestDispatcher dispatcher;
+        String path = request.getPathInfo();
+        if (path == null) path = "";
+
+        switch (path) {
+            case "/loginPage":
+                dispatcher = getServletContext().getRequestDispatcher(JspUrlResolver.getJspUrl("/login_page.jsp"));
+                dispatcher.forward(request, response);
+                break;
+            case "/registerPage":
+                dispatcher = getServletContext().getRequestDispatcher(JspUrlResolver.getJspUrl("/register_page.jsp"));
+                dispatcher.forward(request, response);
+                break;
+            default:
+                String homeView = JspUrlResolver.getJspUrl("index.jsp");
+                dispatcher = getServletContext().getRequestDispatcher(homeView);
+                dispatcher.forward(request, response);
+        }
     }
 }

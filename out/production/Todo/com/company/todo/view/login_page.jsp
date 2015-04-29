@@ -10,13 +10,13 @@
 </head>
 
 <body>
-<form action="controller/register" method="get">
+<form action="/controller/users/login" method="get">
 
     Please enter your username
-    <input type="text" name="un"/><br>
+    <input type="text" name="un" value="rami"/><br>
 
     Please enter your password
-    <input type="text" name="pw"/>
+    <input type="text" name="pw" value="123"/>
 
     <input type="submit" value="submit">
 

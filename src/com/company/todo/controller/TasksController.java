@@ -1,8 +1,10 @@
 package com.company.todo.controller;
 
+import com.company.todo.Helpers.JspUrlResolver;
 import com.company.todo.model.*;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,65 +22,64 @@ public class TasksController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
     private TodoTasksDao todoTasksDao;
-    private UsersDao usersDao;
 
     public TasksController(){
         super();
-        //todoTasksDao = new TodoTasksDao();
-        try {
-
-            usersDao = new UsersDao();
-        }catch (Exception e) {
-            System.out.print(e.toString());
-        }
+        todoTasksDao = new TodoTasksDao();
     }
 
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        TaskEntity task = new TaskEntity();
+        String taskId = request.getParameter("taskId");
+        if (taskId != null &&  taskId != ""){
+            task.setTaskId(Integer.parseInt(request.getParameter("taskId")));
+        }
 
+        String createdDate = request.getParameter("createdDate");
+        if (createdDate != null && createdDate != "") {
+            task.setDateCreated(java.sql.Date.valueOf(request.getParameter("createdDate")));
+        }
+
+        task.setTitle(request.getParameter("title"));
+        task.setContent(request.getParameter("content"));
+        task.setDuedate(java.sql.Date.valueOf(request.getParameter("dueDate")));
+        task.setUserId(request.getParameter("userId"));
+        String isDeleted = request.getParameter("isDeleted");
+        task.setIsDeleted(Integer.parseInt(isDeleted) != 0);
+
+        try {
+            todoTasksDao.upsertTask(task);
+        } catch (TodoDaoException e) {
+            e.printStackTrace();
+            //TODO - go to error page
+        }
+
+        doGet(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String path = request.getPathInfo();
-        RequestDispatcher dispatcher;
-        switch (path) {
-            case "/register":
-                //todo: implement
-                break;
-
-            case "/login":
-                try {
-
-                    UserEntity user = new UserEntity();
-                    user.setUsername(request.getParameter("un"));
-                    user.setPassword(request.getParameter("pw"));
-
-                    boolean loginSuccessful = usersDao.loginUser(user);
-
-
-                    if (loginSuccessful) {
-                        HttpSession session = request.getSession(true);
-
-                        Iterator<TaskEntity> tasks = (Iterator<TaskEntity>) todoTasksDao.getAllTasksForUser(user.getUsername());
-
-                        session.setAttribute("currentSessionUser", user);
-                        session.setAttribute("notes", tasks);
-
-                        dispatcher = getServletContext().getRequestDispatcher("/userLogged.jsp");
-                        dispatcher.forward(request, response);
-
-                    } else {
-                        dispatcher = getServletContext().getRequestDispatcher("/invalidLogin.jsp");
-                        dispatcher.forward(request, response);
-                    }
-                } catch (TodoDaoException e) {
-                    response.getWriter().print(e.getStackTrace());
-                }
-                break;
-
-
-            default:
-                response.sendRedirect("/controller/landingPage");
+        HttpSession session = request.getSession(false);
+        if (session == null) {
+            ServletContext context = getServletContext();
+            RequestDispatcher dispatcher = context.getNamedDispatcher("HomeController");
+            dispatcher.forward(request, response);
+        } else {
+            UserEntity userSession = (UserEntity)session.getAttribute("currentSessionUser");
+            if (userSession == null){
+                RequestDispatcher dispatcher = getServletContext().getNamedDispatcher("HomeController");
+                dispatcher.forward(request, response);
+            }
+            Iterator<TaskEntity> allTasksForUser = null;
+            try {
+                allTasksForUser = todoTasksDao.getAllTasksForUser(userSession.getUsername());
+            } catch (TodoDaoException e) {
+                //TODO: redirect to error page
+                e.printStackTrace();
+            }
+            request.setAttribute("tasks", allTasksForUser);
+            request.setAttribute("userId", userSession.getUsername());
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(JspUrlResolver.getJspUrl("/allTasks.jsp"));
+            dispatcher.forward(request, response);
         }
     }
 }

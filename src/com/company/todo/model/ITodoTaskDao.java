@@ -12,6 +12,5 @@ public interface ITodoTaskDao {
     public void updateTask(TaskEntity taskEntity) throws TodoDaoException;
     public void deleteTask(int id) throws TodoDaoException;
     public Iterator<TaskEntity> getAllTasksForUser(String username) throws TodoDaoException;
-
-
+    public int upsertTask(TaskEntity taskEntity) throws TodoDaoException;
 }
