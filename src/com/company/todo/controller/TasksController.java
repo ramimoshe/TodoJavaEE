@@ -15,14 +15,14 @@ import java.util.Iterator;
 /**
  * Created by rami on 28/04/2015.
  */
-@WebServlet(name = "TodoController", urlPatterns = { "/controller/*" })
-public class TodoController extends HttpServlet {
+@WebServlet(name = "TasksController", urlPatterns = { "/controller/tasks/*" })
+public class TasksController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
     private TodoTasksDao todoTasksDao;
     private UsersDao usersDao;
 
-    public TodoController(){
+    public TasksController(){
         super();
         //todoTasksDao = new TodoTasksDao();
         try {
@@ -42,14 +42,6 @@ public class TodoController extends HttpServlet {
         String path = request.getPathInfo();
         RequestDispatcher dispatcher;
         switch (path) {
-            case "/testUsers" :
-                dispatcher = getServletContext().getRequestDispatcher("WEB-INF/jsp/userLogged.jsp");
-                dispatcher.forward(request, response);
-            case "/landingPage":
-                dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsp/index.jsp");
-                dispatcher.forward(request, response);
-                break;
-
             case "/register":
                 //todo: implement
                 break;
