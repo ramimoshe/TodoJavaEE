@@ -2,6 +2,7 @@ package com.company.todo.controller;
 
 import com.company.todo.Helpers.JspUrlResolver;
 import com.company.todo.model.*;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -54,7 +55,7 @@ public class TasksController extends HttpServlet {
         task.setDuedate(java.sql.Date.valueOf(request.getParameter("dueDate")));
         task.setUserId(request.getParameter("userId"));
         String isDeleted = request.getParameter("isDeleted");
-        task.setIsDeleted(Integer.parseInt(isDeleted) != 0);
+        task.setIsDeleted(Boolean.parseBoolean(isDeleted));
 
         try {
             todoTasksDao.upsertTask(task);

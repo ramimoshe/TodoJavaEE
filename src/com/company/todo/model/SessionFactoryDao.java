@@ -10,7 +10,6 @@ public class SessionFactoryDao {
             System.out.println("ramiiiiiiiii" + System.getProperty("user.dir"));
             // Create the SessionFactory from hibernate.cfg.xml
             sessionFactory = new Configuration().configure("/com/company/todo/hibernate.cfg.xml").buildSessionFactory();
-//            sessionFactory = new AnnotationConfiguration().configure().buildSessionFactory()
         } catch (Throwable ex) {
             // Make sure you log the exception, as it might be swallowed
             System.err.println("Initial SessionFactory creation failed." + ex);
