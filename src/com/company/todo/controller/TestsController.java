@@ -26,6 +26,11 @@ public class TestsController extends HttpServlet {
     private TodoTasksDao todoTasksDao;
     private UsersDao usersDao;
 
+    public TestsController(){
+        todoTasksDao = new TodoTasksDao();
+        usersDao = new UsersDao();
+    }
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
@@ -33,10 +38,10 @@ public class TestsController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String testResultView = JspUrlResolver.getJspUrl("testResult.jsp");
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(testResultView);
-        HttpSession session = request.getSession(true);
 
-        session.setAttribute("usersResult", testUser());
-        session.setAttribute("tasksResult", testTask());
+
+        request.setAttribute("usersResult", new Boolean(testTask()));
+        request.setAttribute("tasksResult", new Boolean(testTask()));
 
         dispatcher.forward(request, response);
     }

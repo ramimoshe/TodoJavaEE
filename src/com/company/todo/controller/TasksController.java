@@ -17,7 +17,7 @@ import java.util.Iterator;
 /**
  * Created by rami on 28/04/2015.
  */
-@WebServlet(name = "TasksController", urlPatterns = { "/controller/tasks/*" })
+@WebServlet(name = "TasksController", urlPatterns = { "/controller/tasks" })
 public class TasksController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
@@ -29,6 +29,15 @@ public class TasksController extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        upsertTask(request);
+        reloadPage(request, response);
+    }
+
+    private void reloadPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response);
+    }
+
+    private void upsertTask(HttpServletRequest request) {
         TaskEntity task = new TaskEntity();
         String taskId = request.getParameter("taskId");
         if (taskId != null &&  taskId != ""){
@@ -53,8 +62,6 @@ public class TasksController extends HttpServlet {
             e.printStackTrace();
             //TODO - go to error page
         }
-
-        doGet(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

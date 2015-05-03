@@ -66,6 +66,7 @@ public class UsersController extends HttpServlet {
                 } catch (TodoDaoException e) {
                     response.getWriter().print(e.getStackTrace());
                 }
+
                 break;
 
             default:
@@ -77,13 +78,13 @@ public class UsersController extends HttpServlet {
     private void login(HttpServletRequest request, HttpServletResponse response, UserEntity user) throws TodoDaoException, IOException, ServletException {
         //TODO: handle the exceptions
         RequestDispatcher dispatcher;
-        boolean loginSuccessful = usersDao.loginUser(user);
-        if (loginSuccessful) {
+        boolean isLoginSuccessful = usersDao.loginUser(user);
+        if (isLoginSuccessful) {
             HttpSession session = request.getSession(true);
             session.setAttribute("currentSessionUser", user);
-
             ServletContext context = getServletContext();
-            response.sendRedirect("/controller/tasks/");
+
+            response.sendRedirect("/controller/tasks");
         } else {
             dispatcher = getServletContext().getRequestDispatcher(JspUrlResolver.getJspUrl("/invalidLogin.jsp"));
             dispatcher.forward(request, response);
