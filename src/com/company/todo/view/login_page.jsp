@@ -16,7 +16,7 @@
     <input type="text" name="un" value="rami"/><br>
 
     Please enter your password
-    <input type="text" name="pw" value="123"/>
+    <input type="text" name="pw" type="password" value="123"/>
 
     <input type="submit" value="submit">
 
