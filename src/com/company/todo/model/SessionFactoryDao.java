@@ -7,7 +7,6 @@ public class SessionFactoryDao {
 
     static {
         try {
-            System.out.println("ramiiiiiiiii" + System.getProperty("user.dir"));
             // Create the SessionFactory from hibernate.cfg.xml
             sessionFactory = new Configuration().configure("/com/company/todo/hibernate.cfg.xml").buildSessionFactory();
         } catch (Throwable ex) {

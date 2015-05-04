@@ -36,7 +36,7 @@ public class TestsController extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String testResultView = JspUrlResolver.getJspUrl("testResult.jsp");
+        String testResultView = JspUrlResolver.getJspUrl("test_result.jsp");
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(testResultView);
 
 

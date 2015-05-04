@@ -23,12 +23,28 @@
             document.getElementById("submit").value = "Save";
         }
 
-        function deleteTask(taskId, title, content, dueDate, createdDate, userId) {
+        function sendTask(taskId, title, content, dueDate, createdDate, userId, isDeleted) {
             var xmlhttp = new XMLHttpRequest();
-            xmlhttp.open("POST", "/controller/tasks/", true);
+            xmlhttp.open("POST", "/controller/tasks", true);
             xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xmlhttp.send("&userId=" + userId + "&taskId=" + taskId + "&title=" + title + "&content=" + content + "&dueDate=" + dueDate + "&createdDate=" + createdDate + "&isDeleted=1");
-            location.reload();
+            xmlhttp.send("&userId=" + userId + "&taskId=" + taskId + "&title=" + title + "&content=" + content + "&dueDate=" + dueDate + "&createdDate=" + createdDate + "&isDeleted=" + isDeleted);
+        }
+
+        function deleteTask(taskId, title, content, dueDate, createdDate, userId){
+            sendTask(taskId, title, content, dueDate, createdDate, userId, 1);
+            //window.location = window.location.href;
+        }
+
+        function upsertTask(){
+            sendTask(
+                    document.getElementById("taskId").value,
+                    document.getElementById("title").value,
+                    document.getElementById("content").value,
+                    document.getElementById("dueDate").value,
+                    document.getElementById("createdDate").value,
+                    document.getElementById("userId").value,
+                    document.getElementById("isDeleted").value);
+            //window.location = window.location.href;
         }
 
     </script>
@@ -36,6 +52,7 @@
 </head>
 <body align="center">
 <h1>Your Tasks</h1>
+
 
 <%
     out.println("<table border=1 >" +
@@ -97,7 +114,7 @@
 <div align="left">
     <table style="width:20%">
 
-        <form id="taskForm" action="/controller/tasks" method="post">
+        <form id="taskForm" onsubmit="upsertTask()">
             <tr>
                 <td>Title</td>
                 <td><input id="title" type="text" name="title"/></td>

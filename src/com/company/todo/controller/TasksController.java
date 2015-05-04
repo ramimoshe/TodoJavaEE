@@ -31,7 +31,7 @@ public class TasksController extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         upsertTask(request);
-        reloadPage(request, response);
+        //reloadPage(request, response);
     }
 
     private void reloadPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -54,8 +54,8 @@ public class TasksController extends HttpServlet {
         task.setContent(request.getParameter("content"));
         task.setDuedate(java.sql.Date.valueOf(request.getParameter("dueDate")));
         task.setUserId(request.getParameter("userId"));
-        String isDeleted = request.getParameter("isDeleted");
-        task.setIsDeleted(Boolean.parseBoolean(isDeleted));
+        boolean isDeleted = Boolean.parseBoolean(request.getParameter("isDeleted"));
+        task.setIsDeleted(isDeleted);
 
         try {
             todoTasksDao.upsertTask(task);
@@ -86,7 +86,7 @@ public class TasksController extends HttpServlet {
             }
             request.setAttribute("tasks", allTasksForUser);
             request.setAttribute("userId", userSession.getUsername());
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(JspUrlResolver.getJspUrl("/allTasks.jsp"));
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(JspUrlResolver.getJspUrl("/all_tasks.jsp"));
             dispatcher.forward(request, response);
         }
     }

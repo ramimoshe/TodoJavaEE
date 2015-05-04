@@ -106,7 +106,7 @@ public class UsersController extends HttpServlet {
 
             response.sendRedirect("/controller/tasks");
         } else {
-            dispatcher = getServletContext().getRequestDispatcher(JspUrlResolver.getJspUrl("/invalidLogin.jsp"));
+            dispatcher = getServletContext().getRequestDispatcher(JspUrlResolver.getJspUrl("/invalid_login.jsp"));
             dispatcher.forward(request, response);
         }
     }
