@@ -10,19 +10,19 @@
             <generator class="increment"></generator>
         </id>
         <property name="title">
-            <column name="title" sql-type="varchar" length="1024" />
+            <column name="title" sql-type="varchar(50)" length="1024" />
         </property>
         <property name="content">
-            <column name="content" sql-type="varchar" length="1024" />
+            <column name="content" sql-type="varchar(100)" length="1024" />
         </property>
         <property name="duedate">
             <column name="duedate" sql-type="date" />
         </property>
         <property name="dateCreated">
-            <column name="dateCreated" default="now()" sql-type="datetime" />
+            <column name="dateCreated" sql-type="datetime" />
         </property>
         <property name="userId">
-            <column name="userId" sql-type="varchar" />
+            <column name="userId" sql-type="varchar(50)" />
         </property>
         <property name="isDeleted">
             <column name="isDeleted" sql-type="BOOLEAN"/>

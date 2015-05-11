@@ -34,6 +34,7 @@ public class TodoTasksDao implements ITodoTaskDao {
             throw new TodoDaoException("Exception in getting task", he);
         } finally {
             if (session != null) {
+                session.flush();
                 session.close();
             }
         }
@@ -56,6 +57,7 @@ public class TodoTasksDao implements ITodoTaskDao {
             throw new TodoDaoException("Exception in getting all tasks", he);
         } finally {
             if (session != null) {
+                session.flush();
                 session.close();
             }
         }
@@ -81,6 +83,7 @@ public class TodoTasksDao implements ITodoTaskDao {
             throw new TodoDaoException("Exception in getting user specific Tasks tasks", he);
         } finally {
             if (session != null) {
+                session.flush();
                 session.close();
             }
         }
@@ -94,8 +97,11 @@ public class TodoTasksDao implements ITodoTaskDao {
                 taskEntity.setDateCreated(new java.sql.Date(new Date().getTime()));
             }
 
-            session = getSession().openSession();
+            session = getSession().withOptions().openSession();
+            session.setFlushMode(FlushMode.MANUAL);
+            System.out.println("session was created session.isConnected()"+session.isConnected()+" session.getFlushMode()"+session.getFlushMode());
             transaction = session.beginTransaction();
+            System.out.println("transaction was received from beginTransaction() transaction.isActive()"+transaction.isActive());
             session.saveOrUpdate(taskEntity);
             transaction.commit();
             return taskEntity.getTaskId();
@@ -107,6 +113,7 @@ public class TodoTasksDao implements ITodoTaskDao {
             throw new TodoDaoException("Exception in getting all tasks", he);
         } finally {
             if (session != null) {
+                session.flush();
                 session.close();
             }
         }

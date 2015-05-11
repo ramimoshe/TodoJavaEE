@@ -32,6 +32,7 @@ public class UsersDao implements ITodoUsersDao {
             throw new TodoDaoException("Exception getting user by id", he);
         } finally {
             if (session != null) {
+                session.flush();
                 session.close();
             }
         }
@@ -54,6 +55,7 @@ public class UsersDao implements ITodoUsersDao {
             throw new TodoDaoException("Exception getting all users", he);
         } finally {
             if (session != null) {
+                session.flush();
                 session.close();
             }
         }
@@ -76,6 +78,7 @@ public class UsersDao implements ITodoUsersDao {
             throw new TodoDaoException("Exception in adding user", he);
         } finally {
             if (session != null) {
+                session.flush();
                 session.close();
             }
         }
@@ -97,6 +100,7 @@ public class UsersDao implements ITodoUsersDao {
             throw new TodoDaoException("Exception in adding user", he);
         } finally {
             if (session != null) {
+                session.flush();
                 session.close();
             }
         }
@@ -125,6 +129,7 @@ public class UsersDao implements ITodoUsersDao {
             throw new TodoDaoException("Exception in login", he);
         } finally {
             if (session != null) {
+                session.flush();
                 session.close();
             }
         }
@@ -149,6 +154,7 @@ public class UsersDao implements ITodoUsersDao {
             throw new TodoDaoException("Exception in login", he);
         } finally {
             if (session != null) {
+                session.flush();
                 session.close();
             }
         }
