@@ -4,7 +4,7 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="com.company.todo.model.UserEntity" table="users" schema="" catalog="tododb">
+    <class name="com.company.todo.model.UserEntity" table="users" schema="" catalog="tododb2">
         <id name="username">
             <column name="username" sql-type="varchar" length="50" not-null="true"/>
         </id>

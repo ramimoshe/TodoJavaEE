@@ -7,8 +7,8 @@ import java.sql.Date;
 /**
  * Created by Boris Borshevsky on 4/16/2015.
  */
-@Entity
-@Table(name = "tasks", schema = "", catalog = "tododb")
+//@Entity
+//@Table(name = "tasks", schema = "", catalog = "tododb")
 public class TaskEntity implements Serializable {
 
     private static final long serialVersionUID = 234L;
@@ -22,9 +22,9 @@ public class TaskEntity implements Serializable {
     private boolean isDeleted;
 
 
-    @Id
-    @GeneratedValue
-    @Column(name = "id", nullable = false, insertable = true, updatable = true)
+    //@Id
+    //@GeneratedValue
+    //@Column(name = "id", nullable = false, insertable = true, updatable = true)
     public int getTaskId() {
         return taskId;
     }
@@ -33,8 +33,8 @@ public class TaskEntity implements Serializable {
         this.taskId = id;
     }
 
-    @Basic
-    @Column(name = "title", nullable = false, insertable = true, updatable = true, length = 1024)
+    //@Basic
+    //@Column(name = "title", nullable = false, insertable = true, updatable = true, length = 1024)
     public String getTitle() {
         return title;
     }
@@ -43,8 +43,8 @@ public class TaskEntity implements Serializable {
         this.title = title;
     }
 
-    @Basic
-    @Column(name = "content", nullable = false, insertable = true, updatable = true, length = 1024)
+    //@Basic
+    //@Column(name = "content", nullable = false, insertable = true, updatable = true, length = 1024)
     public String getContent() {
         return content;
     }
@@ -53,8 +53,8 @@ public class TaskEntity implements Serializable {
         this.content = content;
     }
 
-    @Basic
-    @Column(name = "duedate", nullable = false, insertable = true, updatable = true)
+    //@Basic
+    //@Column(name = "duedate", nullable = false, insertable = true, updatable = true)
     public Date getDuedate() {
         return duedate;
     }
@@ -63,8 +63,8 @@ public class TaskEntity implements Serializable {
         this.duedate = duedate;
     }
 
-    @Basic
-    @Column(name = "dateCreated", nullable = false, insertable = true, updatable = true)
+    //@Basic
+    //@Column(name = "dateCreated", nullable = false, insertable = true, updatable = true)
     public Date getDateCreated() {
         return dateCreated;
     }
@@ -73,8 +73,8 @@ public class TaskEntity implements Serializable {
         this.dateCreated = dateCreated;
     }
 
-    @Basic
-    @Column(name = "userId", nullable = false, insertable = true, updatable = true)
+    //@Basic
+    //@Column(name = "userId", nullable = false, insertable = true, updatable = true)
     public String getUserId() {
         return userId;
     }
@@ -83,8 +83,8 @@ public class TaskEntity implements Serializable {
         this.userId = userId;
     }
 
-    @Basic
-    @Column(name = "isDeleted", nullable = false, insertable = true, updatable = true)
+    //@Basic
+    //@Column(name = "isDeleted", nullable = false, insertable = true, updatable = true)
     public boolean getIsDeleted() {
         return isDeleted;
     }

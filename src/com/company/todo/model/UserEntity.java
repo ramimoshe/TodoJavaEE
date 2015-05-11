@@ -7,8 +7,8 @@ import java.sql.Date;
 /**
  * Created by Boris Borshevsky on 4/16/2015.
  */
-@Entity
-@Table(name = "users", schema = "", catalog = "tododb")
+//@Entity
+//@Table(name = "users", schema = "", catalog = "tododb")
 public class UserEntity implements Serializable{
 
     private static final long serialVersionUID = 752L;
@@ -29,8 +29,8 @@ public class UserEntity implements Serializable{
     }
 
 
-    @Id
-    @Column(name = "username", nullable = false, insertable = true, updatable = true, length = 50)
+    //@Id
+    //@Column(name = "username", nullable = false, insertable = true, updatable = true, length = 50)
     public String getUsername() {
         return username;
     }
@@ -39,8 +39,8 @@ public class UserEntity implements Serializable{
         this.username = username;
     }
 
-    @Basic
-    @Column(name = "password", nullable = false, insertable = true, updatable = true, length = 50)
+    //@Basic
+    //@Column(name = "password", nullable = false, insertable = true, updatable = true, length = 50)
     public String getPassword() {
         return password;
     }
@@ -49,8 +49,8 @@ public class UserEntity implements Serializable{
         this.password = password;
     }
 
-    @Basic
-    @Column(name = "dateCreated", nullable = false, insertable = true, updatable = true)
+    //@Basic
+    //@Column(name = "dateCreated", nullable = false, insertable = true, updatable = true)
     public Date getDateCreated() {
         return dateCreated;
     }
@@ -59,8 +59,8 @@ public class UserEntity implements Serializable{
         this.dateCreated = dateCreated;
     }
 
-    @Basic
-    @Column(name = "isDeleted", nullable = false, insertable = true, updatable = true)
+    //@Basic
+    //@Column(name = "isDeleted", nullable = false, insertable = true, updatable = true)
     public boolean getIsDeleted() {
         return isDeleted;
     }

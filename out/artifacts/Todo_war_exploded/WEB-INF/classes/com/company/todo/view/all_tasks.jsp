@@ -31,7 +31,9 @@
         }
 
         function deleteTask(taskId, title, content, dueDate, createdDate, userId){
-            sendTask(taskId, title, content, dueDate, createdDate, userId, 1);
+            sendTask(taskId, title, content, dueDate, createdDate, userId, true);
+            console.log("delete");
+            window.location.reload();
             //window.location = window.location.href;
         }
 
@@ -44,6 +46,8 @@
                     document.getElementById("createdDate").value,
                     document.getElementById("userId").value,
                     document.getElementById("isDeleted").value);
+            console.log("test");
+            window.location.reload();
             //window.location = window.location.href;
         }
 
@@ -125,7 +129,7 @@
             </tr>
             <tr>
                 <td>Due Date</td>
-                <td><input id="dueDate" type="datetime" name="dueDate"/></td>
+                <td><input id="dueDate" type="date" name="dueDate"/></td>
             </tr>
             <tr>
                 <td><input id="submit" type="submit" value="Create"></td>
@@ -134,7 +138,7 @@
                 <td><input id="id" type="text" name="id" style="visibility: hidden"/></td>
                 <td><input id="createdDate" type="datetime" name="createdDate" style="visibility: hidden"/></td>
                 <td><input id="userId" type="text" name="userId" style="visibility: hidden" value="<%=userId%>"/></td>
-                <td><input id="isDeleted" type="text" name="isDeleted" style="visibility: hidden" value="0"/></td>
+                <td><input id="isDeleted" type="text" name="isDeleted" style="visibility: hidden" value="false"/></td>
                 <td><input id="taskId" type="number" name="taskId" style="visibility: hidden"/></td>
             </tr>
         </form>
