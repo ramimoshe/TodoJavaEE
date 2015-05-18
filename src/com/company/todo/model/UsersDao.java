@@ -13,10 +13,9 @@ public class UsersDao implements ITodoUsersDao {
         return SessionFactoryDao.getSession();
     }
 
-    private Session session;
-
     @Override
     public UserEntity getUserById(String userName) throws TodoDaoException {
+        Session session = null;
         Transaction transaction = null;
         try {
             session = getSession().openSession();
@@ -40,6 +39,7 @@ public class UsersDao implements ITodoUsersDao {
 
     @Override
     public Iterator<UserEntity> getAllUsers() throws TodoDaoException {
+        Session session = null;
         Transaction transaction = null;
         try {
             session = getSession().openSession();
@@ -63,6 +63,7 @@ public class UsersDao implements ITodoUsersDao {
 
     @Override
     public String addUser(UserEntity userEntity) throws TodoDaoException {
+        Session session = null;
         Transaction transaction = null;
         try {
             session = getSession().openSession();
@@ -86,6 +87,7 @@ public class UsersDao implements ITodoUsersDao {
 
     @Override
     public void updateUser(UserEntity userEntity) throws TodoDaoException {
+        Session session = null;
         Transaction transaction = null;
         try {
             session = getSession().openSession();
@@ -108,6 +110,7 @@ public class UsersDao implements ITodoUsersDao {
 
 
     public boolean loginUser(UserEntity userEntity) throws TodoDaoException {
+        Session session = null;
         Transaction transaction = null;
         try {
             session = getSession().openSession();
@@ -136,6 +139,7 @@ public class UsersDao implements ITodoUsersDao {
     }
 
     public boolean isValidUser(UserEntity userEntity) throws TodoDaoException {
+        Session session = null;
         Transaction transaction = null;
         try {
             session = getSession().openSession();
@@ -173,6 +177,7 @@ public class UsersDao implements ITodoUsersDao {
     }
 
     public void deleteForeverUser(UserEntity user) throws TodoDaoException {
+        Session session = null;
         Transaction transaction = null;
         try {
             session = getSession().openSession();

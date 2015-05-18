@@ -10,15 +10,13 @@ import java.util.Iterator;
  */
 public class TodoTasksDao implements ITodoTaskDao {
 
-    private Session session;
-
     private SessionFactory getSession() {
         return SessionFactoryDao.getSession();
     }
 
     @Override
     public TaskEntity getTaskById(int id) throws TodoDaoException {
-
+        Session session = null;
         Transaction transaction = null;
         try {
             session = getSession().openSession();
@@ -42,6 +40,7 @@ public class TodoTasksDao implements ITodoTaskDao {
 
     @Override
     public Iterator<TaskEntity> getAllTasks() throws TodoDaoException {
+        Session session = null;
         Transaction transaction = null;
         try {
             session = getSession().openSession();
@@ -66,6 +65,7 @@ public class TodoTasksDao implements ITodoTaskDao {
 
     @Override
     public Iterator<TaskEntity> getAllTasksForUser(String username) throws TodoDaoException {
+        Session session = null;
         Transaction transaction = null;
         try {
             session = getSession().openSession();
@@ -91,6 +91,7 @@ public class TodoTasksDao implements ITodoTaskDao {
 
     @Override
     public int upsertTask(TaskEntity taskEntity) throws TodoDaoException {
+        Session session = null;
         Transaction transaction = null;
         try {
             if (taskEntity.getDateCreated() == null){
@@ -121,6 +122,7 @@ public class TodoTasksDao implements ITodoTaskDao {
 
     @Override
     public int addTask(TaskEntity taskEntity) throws TodoDaoException {
+        Session session = null;
         Transaction transaction = null;
         try {
             session = getSession().openSession();
@@ -143,7 +145,7 @@ public class TodoTasksDao implements ITodoTaskDao {
 
     @Override
     public void updateTask(TaskEntity taskEntity) throws TodoDaoException {
-
+        Session session = null;
         Transaction transaction = null;
         try {
             session = getSession().openSession();
@@ -176,6 +178,7 @@ public class TodoTasksDao implements ITodoTaskDao {
     }
 
     public void deleteForeverTask(TaskEntity task) throws TodoDaoException {
+        Session session = null;
         Transaction transaction = null;
         try {
             session = getSession().openSession();
