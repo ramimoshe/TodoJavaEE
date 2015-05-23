@@ -31,9 +31,9 @@ public class TestsController extends HttpServlet {
         usersDao = new UsersDao();
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
+//    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//
+//    }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String testResultView = JspUrlResolver.getJspUrl("test_result.jsp");

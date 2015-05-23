@@ -1,12 +1,5 @@
 <%@ page import="com.company.todo.model.TaskEntity" %>
 <%@ page import="java.util.Iterator" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: rami
-  Date: 28/04/2015
-  Time: 11:14 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -25,19 +18,23 @@
 
         function sendTask(taskId, title, content, dueDate, createdDate, userId, isDeleted) {
             var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    window.location.reload();
+                }
+            };
+
             xmlhttp.open("POST", "/controller/tasks", true);
             xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xmlhttp.send("&userId=" + userId + "&taskId=" + taskId + "&title=" + title + "&content=" + content + "&dueDate=" + dueDate + "&createdDate=" + createdDate + "&isDeleted=" + isDeleted);
         }
 
-        function deleteTask(taskId, title, content, dueDate, createdDate, userId){
+        function deleteTask(taskId, title, content, dueDate, createdDate, userId) {
             sendTask(taskId, title, content, dueDate, createdDate, userId, true);
             console.log("delete");
-            window.location.reload();
-            //window.location = window.location.href;
         }
 
-        function upsertTask(){
+        function upsertTask() {
             sendTask(
                     document.getElementById("taskId").value,
                     document.getElementById("title").value,
@@ -47,8 +44,6 @@
                     document.getElementById("userId").value,
                     document.getElementById("isDeleted").value);
             console.log("test");
-            window.location.reload();
-            //window.location = window.location.href;
         }
 
     </script>
@@ -89,24 +84,24 @@
                         "<td>" + task.getDateCreated() + "</td>" +
                         "<td>" + task.getDuedate() + "</td>" +
                         "<td>" +
-                            "<button onclick=\"editTask('" +
-                            task.getTaskId() + "','" +
-                            task.getTitle() + "','" +
-                            task.getContent() + "','" +
-                            task.getDuedate() + "','" +
-                            task.getDateCreated() + "','" +
-                            task.getIsDeleted() + "')\">Edit</button>" +
+                        "<button onclick=\"editTask('" +
+                        task.getTaskId() + "','" +
+                        task.getTitle() + "','" +
+                        task.getContent() + "','" +
+                        task.getDuedate() + "','" +
+                        task.getDateCreated() + "','" +
+                        task.getIsDeleted() + "')\">Edit</button>" +
                         "</td>" +
                         "<td>" +
-                            "<button onclick=\"deleteTask('" +
-                            task.getTaskId() + "','" +
-                            task.getTitle() + "','" +
-                            task.getContent() + "','" +
-                            task.getDuedate() + "','" +
-                            task.getDateCreated() + "','" +
-                            userId + "')\">Delete</button>" +
+                        "<button onclick=\"deleteTask('" +
+                        task.getTaskId() + "','" +
+                        task.getTitle() + "','" +
+                        task.getContent() + "','" +
+                        task.getDuedate() + "','" +
+                        task.getDateCreated() + "','" +
+                        userId + "')\">Delete</button>" +
                         "</td>" +
-                "</tr>");
+                        "</tr>");
 
     }
     out.println("</table>");
@@ -118,7 +113,7 @@
 <div align="left">
     <table style="width:20%">
 
-        <form id="taskForm" onsubmit="upsertTask()">
+        <form id="taskForm" onsubmit="upsertTask(); return false;">
             <tr>
                 <td>Title</td>
                 <td><input id="title" type="text" name="title"/></td>
